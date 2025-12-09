@@ -109,7 +109,7 @@ export default function ChatPage({ params }: ChatPageProps) {
               )}
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1 leading-relaxed">
-              Ask questions about the repository contents.
+              Ask anything about this codebase.
             </p>
           </div>
           <Button asChild variant="outline" size="sm" className="w-full sm:w-auto flex-shrink-0">

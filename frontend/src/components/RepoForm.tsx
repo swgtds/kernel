@@ -30,16 +30,16 @@ export function RepoForm() {
     try {
       const result = await registerRepo(githubUrl);
       toast({
-        title: "Repository Indexed",
-        description: "You can now start chatting with the repository.",
+        title: "Link added",
+        description: "You're all set — let's chat with this repo.",
       });
       router.push(`/chat/${result.repoId}`);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred.";
+      const errorMessage = err instanceof Error ? err.message : "Hmm, something went wrong. Please try again.";
       setError(errorMessage);
       toast({
         variant: "destructive",
-        title: "Indexing Failed",
+        title: "Couldn't add the link",
         description: errorMessage,
       });
     } finally {
@@ -52,10 +52,10 @@ export function RepoForm() {
       <CardHeader className="pb-4 sm:pb-6">
         <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
           <Github className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
-          <span>Index a Repository</span>
+          <span>Paste a GitHub link</span>
         </CardTitle>
         <CardDescription className="text-sm sm:text-base leading-relaxed">
-          Enter a public GitHub repository URL to get started.
+          Drop the repo link here and start chatting.
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
@@ -63,7 +63,7 @@ export function RepoForm() {
           <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
             <Input
               type="url"
-              placeholder="https://github.com/owner/repo"
+              placeholder="Paste GitHub link (owner/repo)"
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
               disabled={isLoading}
@@ -77,16 +77,16 @@ export function RepoForm() {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Indexing...
+                  Adding...
                 </>
               ) : (
-                "Index Repository"
+                "Start chat"
               )}
             </Button>
           </div>
           {error && !isLoading && (
             <Alert variant="destructive" className="mt-3">
-              <AlertTitle className="text-sm font-medium">Error</AlertTitle>
+              <AlertTitle className="text-sm font-medium">Heads up</AlertTitle>
               <AlertDescription className="text-sm leading-relaxed mt-1">{error}</AlertDescription>
             </Alert>
           )}

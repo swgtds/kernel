@@ -30,9 +30,9 @@ export async function registerRepo(githubUrl: string): Promise<RepoSummary> {
   } catch (error) {
     console.error('Error registering repo:', error);
     if (error instanceof Error) {
-      throw new Error(`Failed to index repository: ${error.message}`);
+      throw new Error(`Couldn't add that link: ${error.message}`);
     }
-    throw new Error('Failed to index repository. The URL might be invalid or the repository inaccessible.');
+    throw new Error('We couldn\'t add that link. Please check the URL and try again.');
   }
 }
 
