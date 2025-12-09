@@ -1,4 +1,4 @@
-import type { RepoSummary, ChatResponse } from '@/types';
+import type { RepoSummary, ChatResponse, RepoInfo } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
 
@@ -33,6 +33,21 @@ export async function registerRepo(githubUrl: string): Promise<RepoSummary> {
       throw new Error(`Failed to index repository: ${error.message}`);
     }
     throw new Error('Failed to index repository. The URL might be invalid or the repository inaccessible.');
+  }
+}
+
+export async function getRepoInfo(repoId: string): Promise<RepoInfo> {
+  try {
+    const result = await fetcher(`/api/repo/${repoId}`, {
+      method: 'GET',
+    });
+    return result;
+  } catch (error) {
+    console.error('Error getting repo info:', error);
+    if (error instanceof Error) {
+      throw new Error(`Failed to get repository info: ${error.message}`);
+    }
+    throw new Error('Failed to get repository information.');
   }
 }
 

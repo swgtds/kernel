@@ -18,6 +18,14 @@ export interface ChatMessage {
 export interface RepoSummary {
   repoId: string;
   summary: string;
+  githubUrl: string;
+}
+
+export interface RepoInfo {
+  repoId: string;
+  githubUrl: string;
+  owner: string;
+  repo: string;
 }
 
 export interface ChatResponse {

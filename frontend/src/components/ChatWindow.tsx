@@ -30,12 +30,34 @@ export function ChatWindow({ knowledgeType, targetId }: ChatWindowProps) {
 
   // Utility functions to convert targetId to GitHub info
   const parseRepoId = (repoId: string) => {
+    // First try old "github__owner__repo" format
+    if (repoId.includes('__')) {
+      const parts = repoId.split('__');
+      if (parts[0] === 'github' && parts.length === 3) {
+        const owner = parts[1];
+        const repo = parts[2];
+        return { owner, repo };
+      }
+    }
+    
+    // Try old "github-owner-repo" format  
+    if (repoId.startsWith('github-')) {
+      const parts = repoId.split('-');
+      if (parts.length >= 3) {
+        const owner = parts[1];
+        const repo = parts.slice(2).join('-'); // In case repo name contains hyphens
+        return { owner, repo };
+      }
+    }
+    
+    // New format: "owner-repo" (simple format)
     const parts = repoId.split('-');
-    if (parts[0] === 'github' && parts.length >= 3) {
-      const owner = parts[1];
-      const repo = parts.slice(2).join('-');
+    if (parts.length >= 2) {
+      const owner = parts[0];
+      const repo = parts.slice(1).join('-');
       return { owner, repo };
     }
+    
     return null;
   };
 

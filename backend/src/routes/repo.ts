@@ -37,6 +37,7 @@ router.post('/register', async (req: Request, res: Response) => {
     const response: RegisterRepoResponse = {
       repoId,
       summary,
+      githubUrl,
     };
 
     res.status(200).json(response);
@@ -121,6 +122,33 @@ router.post('/chat', async (req: Request, res: Response) => {
     res.status(500).json({
       error: 'Failed to process chat',
       message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// Get Repository Information
+router.get('/:repoId', async (req: Request, res: Response) => {
+  try {
+    const { repoId } = req.params;
+    
+    const repoInfo = githubBackend.getRepoInfo(repoId);
+    if (!repoInfo) {
+      return res.status(404).json({
+        error: 'Repository not found',
+      });
+    }
+
+    res.status(200).json({
+      repoId,
+      githubUrl: repoInfo.url,
+      owner: repoInfo.owner,
+      repo: repoInfo.repo,
+    });
+  } catch (error) {
+    console.error('Error getting repository info:', error);
+    res.status(500).json({
+      error: 'Failed to get repository information',
+      details: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 });

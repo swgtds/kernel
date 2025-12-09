@@ -46,6 +46,7 @@ export interface RegisterRepoRequest {
 export interface RegisterRepoResponse {
   repoId: string;
   summary: string;
+  githubUrl: string;
 }
 
 export interface ChatRequest {

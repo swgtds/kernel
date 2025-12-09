@@ -7,6 +7,7 @@ import { FileChunk } from '../types';
 export class GithubKnowledgeBackend implements KnowledgeBackend {
   private githubLoader = new GitHubLoader();
   private ingestionService = new IngestionService();
+  private repoUrlStore = new Map<string, string>(); // Store repoId -> githubUrl
 
   async ingest(input: unknown): Promise<string> {
     if (typeof input !== 'string') {
@@ -15,6 +16,10 @@ export class GithubKnowledgeBackend implements KnowledgeBackend {
 
     const githubUrl = input as string;
     const repoId = this.generateRepoId(githubUrl);
+    const { owner, repo } = this.githubLoader.parseGitHubUrl(githubUrl);
+
+    // Store repository URL for later retrieval
+    this.repoUrlStore.set(repoId, githubUrl);
 
     try {
       // Clean up any existing data for this repo
@@ -83,7 +88,8 @@ export class GithubKnowledgeBackend implements KnowledgeBackend {
 
   private generateRepoId(githubUrl: string): string {
     const { owner, repo } = this.githubLoader.parseGitHubUrl(githubUrl);
-    return `github-${owner}-${repo}`;
+    // Simple format: owner-repo
+    return `${owner}-${repo}`;
   }
 
   async getRepositoryInfo(githubUrl: string): Promise<RepositoryInfo> {
@@ -94,5 +100,55 @@ export class GithubKnowledgeBackend implements KnowledgeBackend {
     const repoInfo = await this.getRepositoryInfo(githubUrl);
     const fileTree = repoInfo.files.map(f => f.path);
     return this.ingestionService.generateRepositorySummary(repoInfo.readme, fileTree);
+  }
+
+  getRepoInfo(repoId: string): { url: string, owner: string, repo: string } | null {
+    // Check if we have the stored URL
+    const stored = this.repoUrlStore.get(repoId);
+    if (stored) {
+      const { owner, repo } = this.githubLoader.parseGitHubUrl(stored);
+      return { url: stored, owner, repo };
+    }
+
+    // Fallback: try to parse from repoId format
+    const parsed = this.parseRepoIdFallback(repoId);
+    if (parsed) {
+      const url = `https://github.com/${parsed.owner}/${parsed.repo}`;
+      // Cache it for future requests
+      this.repoUrlStore.set(repoId, url);
+      return { url, owner: parsed.owner, repo: parsed.repo };
+    }
+
+    return null;
+  }
+
+  private parseRepoIdFallback(repoId: string): { owner: string, repo: string } | null {
+    // First try old "github__owner__repo" format
+    if (repoId.includes('__')) {
+      const parts = repoId.split('__');
+      if (parts[0] === 'github' && parts.length === 3) {
+        return { owner: parts[1], repo: parts[2] };
+      }
+    }
+    
+    // Try old "github-owner-repo" format
+    if (repoId.startsWith('github-')) {
+      const parts = repoId.split('-');
+      if (parts.length >= 3) {
+        const owner = parts[1];
+        const repo = parts.slice(2).join('-'); // In case repo name contains hyphens
+        return { owner, repo };
+      }
+    }
+    
+    // New format: "owner-repo" (simple format)
+    const parts = repoId.split('-');
+    if (parts.length >= 2) {
+      const owner = parts[0];
+      const repo = parts.slice(1).join('-'); // In case repo name contains hyphens
+      return { owner, repo };
+    }
+    
+    return null;
   }
 }
