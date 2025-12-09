@@ -1,9 +1,10 @@
 "use client";
 
 import { ChatWindow } from "@/components/ChatWindow";
-import { Home, ExternalLink } from "lucide-react";
+import { Home, ExternalLink, Share2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { use, useEffect, useState } from "react";
 import { getRepoInfo } from "@/lib/api";
 import type { RepoInfo } from "@/types";
@@ -18,6 +19,7 @@ export default function ChatPage({ params }: ChatPageProps) {
   const { repoId } = use(params);
   const [repoInfo, setRepoInfo] = useState<RepoInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchRepoInfo = async () => {
@@ -112,12 +114,41 @@ export default function ChatPage({ params }: ChatPageProps) {
               Ask anything about this codebase.
             </p>
           </div>
-          <Button asChild variant="outline" size="sm" className="w-full sm:w-auto flex-shrink-0">
-            <Link href="/">
-              <Home className="mr-1 sm:mr-2 h-4 w-4" />
-              <span>Home</span>
-            </Link>
-          </Button>
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="flex-1 sm:flex-initial sm:w-auto flex-shrink-0"
+              onClick={async () => {
+                const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+                const title = repoInfo ? `${repoInfo.owner}/${repoInfo.repo}` : 'Chat';
+                const text = 'Check out this repo chat';
+
+                try {
+                  if (navigator.share) {
+                    await navigator.share({ title, text, url: shareUrl });
+                  } else {
+                    await navigator.clipboard.writeText(shareUrl);
+                    toast({ title: 'Link copied', description: 'Share it anywhere you like.' });
+                  }
+                } catch (err) {
+                  await navigator.clipboard.writeText(shareUrl);
+                  toast({ title: 'Link copied', description: 'Share it anywhere you like.' });
+                }
+              }}
+            >
+              <Share2 className="mr-1 sm:mr-2 h-4 w-4" />
+              <span className="text-xs sm:text-sm">Share</span>
+            </Button>
+
+            <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-initial sm:w-auto flex-shrink-0">
+              <Link href="/">
+                <Home className="mr-1 sm:mr-2 h-4 w-4" />
+                <span className="text-xs sm:text-sm">Home</span>
+              </Link>
+            </Button>
+          </div>
         </header>
         
         <ChatWindow
