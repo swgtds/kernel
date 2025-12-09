@@ -41,29 +41,29 @@ export default function ChatPage({ params }: ChatPageProps) {
 
   return (
     <main className="min-h-screen bg-background font-body text-foreground">
-      <div className="container mx-auto max-w-4xl p-2 sm:p-4 md:p-8">
-        <header className="flex justify-between items-center mb-4 sm:mb-8">
-          <div className="text-left">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight font-headline truncate">
-              Chat with{' '}
+      <div className="container mx-auto max-w-4xl p-3 sm:p-4 md:p-8">
+        <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4 mb-3 sm:mb-4 md:mb-8">
+          <div className="text-left min-w-0 flex-1">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight font-headline">
+              <span className="block sm:inline">Chat with{' '}</span>
               <a 
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80 hover:underline transition-all duration-200 cursor-pointer inline-flex items-center gap-1"
+                className="text-accent hover:text-accent/80 hover:underline transition-all duration-200 cursor-pointer inline-flex items-center gap-1 break-all sm:break-normal"
               >
-                github/{displayName}
-                <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="break-all">github/{displayName}</span>
+                <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
               </a>
             </h1>
-            <p className="text-sm sm:text-md text-muted-foreground mt-1">
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1 leading-relaxed">
               Ask questions about the repository contents.
             </p>
           </div>
-          <Button asChild variant="outline" size="sm" className="sm:size-auto">
+          <Button asChild variant="outline" size="sm" className="w-full sm:w-auto flex-shrink-0">
             <Link href="/">
-              <Home className="mr-0 sm:mr-2 h-4 w-4" />
-              <span className="hidden sm:inline">Home</span>
+              <Home className="mr-1 sm:mr-2 h-4 w-4" />
+              <span>Home</span>
             </Link>
           </Button>
         </header>

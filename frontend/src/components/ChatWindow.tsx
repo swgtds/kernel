@@ -54,13 +54,23 @@ export function ChatWindow({ knowledgeType, targetId }: ChatWindowProps) {
   };
 
   useEffect(() => {
-    // Auto-scroll to the bottom of the chat messages
-    if (scrollAreaRef.current) {
+    // Auto-scroll to the bottom of the chat messages with a slight delay to handle dynamic content
+    const scrollToBottom = () => {
+      if (scrollAreaRef.current) {
         const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
         if (viewport) {
-            viewport.scrollTop = viewport.scrollHeight;
+          viewport.scrollTop = viewport.scrollHeight;
         }
-    }
+      }
+    };
+
+    // Immediate scroll
+    scrollToBottom();
+    
+    // Delayed scroll to handle accordion expansion
+    const timeoutId = setTimeout(scrollToBottom, 100);
+    
+    return () => clearTimeout(timeoutId);
   }, [messages, isLoading]);
 
   const handleSend = async () => {
@@ -116,58 +126,62 @@ export function ChatWindow({ knowledgeType, targetId }: ChatWindowProps) {
   };
 
   return (
-    <Card className="flex flex-col h-[calc(100vh-120px)] sm:h-[75vh]">
-      <CardContent className="flex-grow flex flex-col gap-4 overflow-hidden pt-6">
-        <ScrollArea className="flex-grow pr-4 -mr-4" ref={scrollAreaRef}>
-          <div className="space-y-6">
+    <Card className="flex flex-col h-[calc(100vh-120px)] sm:h-[calc(100vh-140px)] md:h-[75vh]">
+      <CardContent className="flex-grow flex flex-col gap-2 sm:gap-4 overflow-hidden pt-3 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6">
+        <ScrollArea className="flex-grow pr-1 sm:pr-4 -mr-1 sm:-mr-4" ref={scrollAreaRef}>
+          <div className="space-y-3 sm:space-y-4 md:space-y-6 pb-2">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={cn(
-                  "flex gap-3 text-sm",
+                  "flex gap-2 sm:gap-3 text-sm w-full",
                   message.role === "user" ? "justify-end" : "justify-start"
                 )}
               >
                 {message.role === 'assistant' && (
-                    <Avatar className="w-8 h-8">
-                        <AvatarFallback><Bot className="w-5 h-5"/></AvatarFallback>
+                    <Avatar className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 mt-1">
+                        <AvatarFallback><Bot className="w-3 h-3 sm:w-5 sm:h-5"/></AvatarFallback>
                     </Avatar>
                 )}
                 <div
                   className={cn(
-                    "p-3 rounded-lg max-w-xs sm:max-w-sm md:max-w-xl shadow-sm",
-                    message.role === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
+                    "p-2 sm:p-3 rounded-lg shadow-sm min-w-0 break-words",
+                    message.role === "user" 
+                      ? "bg-primary text-primary-foreground max-w-[82%] sm:max-w-sm md:max-w-xl" 
+                      : "bg-muted text-muted-foreground max-w-[85%] sm:max-w-md md:max-w-2xl"
                   )}
                 >
-                  <p className="whitespace-pre-wrap text-foreground">{message.text}</p>
+                  <p className="whitespace-pre-wrap text-foreground text-sm leading-relaxed break-words">{message.text}</p>
                   {message.sources && message.sources.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-muted-foreground/20">
+                    <div className="mt-2 pt-2 border-t border-muted-foreground/20 w-full">
                       <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="sources" className="border-none">
-                          <AccordionTrigger className="text-xs font-semibold py-1 hover:no-underline">
-                            Sources ({message.sources.length})
+                          <AccordionTrigger className="text-xs font-semibold py-2 px-0 hover:no-underline justify-between [&[data-state=open]>svg]:rotate-180">
+                            <span className="text-left">Sources ({message.sources.length})</span>
                           </AccordionTrigger>
-                          <AccordionContent className="pt-2 text-xs space-y-1 font-mono">
-                            {message.sources.map((source, index) => {
-                              const githubUrl = createGitHubSourceLink(source);
-                              return (
-                                <a
-                                  key={index}
-                                  href={githubUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center bg-background/50 p-2 rounded text-muted-foreground hover:text-accent hover:bg-accent/10 transition-all duration-200 cursor-pointer group"
-                                >
-                                  {renderSourceIcon(source.filePath)}
-                                  <span className="truncate flex-1">
-                                    {source.filePath}:{source.startLine}-{source.endLine}
-                                  </span>
-                                  <ExternalLink className="h-3 w-3 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                                </a>
-                              );
-                            })}
+                          <AccordionContent className="pt-1 pb-0 px-0 overflow-hidden">
+                            <div className="space-y-1">
+                              {message.sources.map((source, index) => {
+                                const githubUrl = createGitHubSourceLink(source);
+                                return (
+                                  <a
+                                    key={index}
+                                    href={githubUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center w-full bg-background/30 p-2 rounded text-muted-foreground hover:text-accent hover:bg-accent/10 transition-all duration-200 cursor-pointer group min-h-[36px] border border-muted/20"
+                                  >
+                                    <div className="flex items-center min-w-0 flex-1 gap-2">
+                                      {renderSourceIcon(source.filePath)}
+                                      <span className="text-xs font-mono truncate flex-1 leading-tight">
+                                        {source.filePath.split('/').pop()}:{source.startLine}-{source.endLine}
+                                      </span>
+                                    </div>
+                                    <ExternalLink className="h-3 w-3 ml-2 opacity-60 group-hover:opacity-100 transition-opacity duration-200 flex-shrink-0" />
+                                  </a>
+                                );
+                              })}
+                            </div>
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
@@ -175,36 +189,36 @@ export function ChatWindow({ knowledgeType, targetId }: ChatWindowProps) {
                   )}
                 </div>
                  {message.role === 'user' && (
-                    <Avatar className="w-8 h-8">
-                        <AvatarFallback><User className="w-5 h-5"/></AvatarFallback>
+                    <Avatar className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 mt-1">
+                        <AvatarFallback><User className="w-3 h-3 sm:w-5 sm:h-5"/></AvatarFallback>
                     </Avatar>
                  )}
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start gap-3 text-sm">
-                <Avatar className="w-8 h-8">
-                    <AvatarFallback><Bot className="w-5 h-5"/></AvatarFallback>
+              <div className="flex justify-start gap-2 sm:gap-3 text-sm w-full">
+                <Avatar className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 mt-1">
+                    <AvatarFallback><Bot className="w-3 h-3 sm:w-5 sm:h-5"/></AvatarFallback>
                 </Avatar>
-                <div className="p-3 rounded-lg bg-muted flex items-center gap-2 text-muted-foreground">
-                    <Loader2 className="w-4 h-4 animate-spin"/>
-                    <span>Thinking...</span>
+                <div className="p-2 sm:p-3 rounded-lg bg-muted flex items-center gap-2 text-muted-foreground max-w-[85%]">
+                    <Loader2 className="w-4 h-4 animate-spin flex-shrink-0"/>
+                    <span className="text-sm">Thinking...</span>
                 </div>
               </div>
             )}
             {messages.length === 0 && !isLoading && (
-              <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
-                <Bot className="h-12 w-12 mb-4" />
-                <p className="text-lg">Start the conversation</p>
-                <p className="text-sm">Ask anything about the repository.</p>
+              <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground px-4 py-8">
+                <Bot className="h-8 w-8 sm:h-12 sm:w-12 mb-2 sm:mb-4" />
+                <p className="text-base sm:text-lg font-medium">Start the conversation</p>
+                <p className="text-sm text-muted-foreground/80 mt-1">Ask anything about the repository.</p>
               </div>
             )}
           </div>
         </ScrollArea>
-        <div className="pt-4 border-t">
+        <div className="pt-2 sm:pt-4 border-t">
           <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="relative">
             <Textarea
-              placeholder="Ask a question about the repository..."
+              placeholder="Ask any question..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
@@ -214,21 +228,21 @@ export function ChatWindow({ knowledgeType, targetId }: ChatWindowProps) {
                 }
               }}
               disabled={isLoading}
-              className="pr-12 min-h-[40px] resize-none"
+              className="pr-10 sm:pr-14 min-h-[44px] sm:min-h-[48px] resize-none text-sm sm:text-base border-2 focus:border-accent"
               rows={1}
             />
             <Button
               type="submit"
               size="icon"
               disabled={isLoading || !input.trim()}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 h-8 w-8 bg-primary hover:bg-primary/90"
+              className="absolute right-1.5 sm:right-2.5 top-1/2 -translate-y-1/2 h-7 w-7 sm:h-8 sm:w-8 bg-primary hover:bg-primary/90 border-0"
             >
-              <Send className="h-4 w-4" />
+              <Send className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="sr-only">Send</span>
             </Button>
           </form>
           {error && (
-            <p className="text-xs text-destructive mt-2">{error}</p>
+            <p className="text-xs sm:text-sm text-destructive mt-2 px-1">{error}</p>
           )}
         </div>
       </CardContent>

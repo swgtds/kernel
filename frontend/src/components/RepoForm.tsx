@@ -48,29 +48,31 @@ export function RepoForm() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Github className="h-6 w-6" />
-          Index a Repository
+    <Card className="w-full">
+      <CardHeader className="pb-4 sm:pb-6">
+        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <Github className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
+          <span>Index a Repository</span>
         </CardTitle>
-        <CardDescription>Enter a public GitHub repository URL to get started.</CardDescription>
+        <CardDescription className="text-sm sm:text-base leading-relaxed">
+          Enter a public GitHub repository URL to get started.
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col sm:flex-row gap-2">
+      <CardContent className="pt-0">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
             <Input
               type="url"
               placeholder="https://github.com/owner/repo"
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
               disabled={isLoading}
-              className="flex-grow"
+              className="flex-grow text-sm sm:text-base min-h-[44px] sm:min-h-[40px]"
             />
             <Button
               type="submit"
               disabled={isLoading || !githubUrl}
-              className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90"
+              className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 min-h-[44px] sm:min-h-[40px] text-sm sm:text-base font-medium"
             >
               {isLoading ? (
                 <>
@@ -83,9 +85,9 @@ export function RepoForm() {
             </Button>
           </div>
           {error && !isLoading && (
-            <Alert variant="destructive">
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant="destructive" className="mt-3">
+              <AlertTitle className="text-sm font-medium">Error</AlertTitle>
+              <AlertDescription className="text-sm leading-relaxed mt-1">{error}</AlertDescription>
             </Alert>
           )}
         </form>
