@@ -148,7 +148,7 @@ export function ChatWindow({ knowledgeType, targetId }: ChatWindowProps) {
   };
 
   return (
-    <Card className="premium-card flex flex-col h-[calc(100vh-120px)] sm:h-[calc(100vh-140px)] md:h-[75vh]">
+    <Card className="premium-card flex flex-col h-[calc(100dvh-120px)] sm:h-[calc(100dvh-140px)] md:h-[75dvh]">
       <CardContent className="flex-grow flex flex-col gap-2 sm:gap-4 overflow-hidden pt-3 pb-3 px-2 sm:pt-6 sm:pb-6 sm:px-6">
         <ScrollArea className="flex-grow pr-1 sm:pr-4 -mr-1 sm:-mr-4" ref={scrollAreaRef}>
           <div className="space-y-3 sm:space-y-4 md:space-y-6 pb-2">
