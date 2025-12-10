@@ -51,10 +51,10 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background font-body text-foreground animate-in fade-in duration-500">
+    <main className="min-h-screen bg-glow font-body text-foreground animate-in fade-in duration-500">
       <div className="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
         <header className="text-center mb-6 sm:mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-headline bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-headline gradient-text">
             Kernel
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground mt-2 leading-relaxed px-2">
@@ -63,8 +63,8 @@ export default function Home() {
         </header>
 
         <Tabs defaultValue="repository" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 h-auto">
-            <TabsTrigger value="repository" className="flex items-center justify-center gap-2 py-3 text-sm sm:text-base">
+          <TabsList className="grid w-full grid-cols-2 h-auto bg-background/50 backdrop-blur-sm border border-border/50">
+            <TabsTrigger value="repository" className="flex items-center justify-center gap-2 py-3 text-sm sm:text-base data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-lg transition-all duration-200">
               <Code className="h-4 w-4" />
               <span className="hidden xs:inline sm:inline">Repository</span>
               <span className="xs:hidden sm:hidden">Repo</span>
@@ -84,7 +84,7 @@ export default function Home() {
           </TabsContent>
 
           <TabsContent value="pdf" className="mt-4 sm:mt-6">
-             <Card className="glass-card flex flex-col items-center justify-center h-[50vh] sm:h-[60vh] md:h-[70vh] border-dashed">
+             <Card className="premium-card flex flex-col items-center justify-center h-[50vh] sm:h-[60vh] md:h-[70vh] border-dashed">
                 <CardHeader className="text-center px-4">
                   <CardTitle className="text-lg sm:text-xl">Coming Soon</CardTitle>
                   <CardDescription className="text-sm sm:text-base leading-relaxed">

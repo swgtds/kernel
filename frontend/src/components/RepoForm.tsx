@@ -48,10 +48,10 @@ export function RepoForm() {
   };
 
   return (
-    <Card className="glass-card w-full">
+    <Card className="premium-card w-full">
       <CardHeader className="pb-4 sm:pb-6">
         <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-          <Github className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
+          <Github className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 text-primary" />
           <span>Paste a GitHub link</span>
         </CardTitle>
         <CardDescription className="text-sm sm:text-base leading-relaxed">
@@ -67,12 +67,12 @@ export function RepoForm() {
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
               disabled={isLoading}
-              className="flex-grow text-sm sm:text-base min-h-[44px] sm:min-h-[40px]"
+              className="flex-grow text-sm sm:text-base min-h-[44px] sm:min-h-[40px] premium-input"
             />
             <Button
               type="submit"
               disabled={isLoading || !githubUrl}
-              className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 min-h-[44px] sm:min-h-[40px] text-sm sm:text-base font-medium"
+              className="saas-button w-full sm:w-auto min-h-[44px] sm:min-h-[40px] text-sm sm:text-base font-semibold px-6"
             >
               {isLoading ? (
                 <>
@@ -85,7 +85,7 @@ export function RepoForm() {
             </Button>
           </div>
           {error && !isLoading && (
-            <Alert variant="destructive" className="mt-3">
+            <Alert variant="destructive" className="mt-3 bg-destructive/10 border-destructive/20">
               <AlertTitle className="text-sm font-medium">Heads up</AlertTitle>
               <AlertDescription className="text-sm leading-relaxed mt-1">{error}</AlertDescription>
             </Alert>

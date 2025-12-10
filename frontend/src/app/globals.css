@@ -229,6 +229,36 @@
     --synthwave-rosewater: 0 0% 99%; /* fdfdfd */
 
     /* ========================================
+       TEAL SAAS (Dark Teal / Neon Cyan Premium SaaS Theme)
+       ======================================== */
+    --teal-saas-base: 220 47% 5%; /* #0B0F14 near-black dark background */
+    --teal-saas-mantle: 220 39% 8%; /* #0E1621 secondary background */
+    --teal-saas-crust: 220 35% 6%; /* #0A0E12 deepest background */
+    --teal-saas-surface-0: 220 39% 10%; /* #12192A card background base */
+    --teal-saas-surface-1: 217 35% 13%; /* #13202F border color */
+    --teal-saas-surface-2: 217 35% 16%; /* #1A2B3F lighter surface */
+    --teal-saas-overlay-0: 217 25% 20%; /* #2A3B4F overlay */
+    --teal-saas-overlay-1: 217 20% 35%; /* #4A5B6F overlay */
+    --teal-saas-overlay-2: 217 15% 50%; /* #7A8B9F overlay */
+    --teal-saas-subtext-0: 217 25% 55%; /* #8FA3B8 muted text */
+    --teal-saas-subtext-1: 217 25% 65%; /* #A5B9CE lighter muted */
+    --teal-saas-text: 210 40% 92%; /* #E6F1FF primary text */
+    --teal-saas-lavender: 177 100% 45%; /* #00E5D8 primary teal */
+    --teal-saas-blue: 177 100% 45%; /* #00E5D8 primary teal */
+    --teal-saas-sapphire: 177 100% 45%; /* #00E5D8 primary teal */
+    --teal-saas-sky: 177 100% 56%; /* #2AFADF accent hover/glow */
+    --teal-saas-teal: 177 100% 45%; /* #00E5D8 primary teal */
+    --teal-saas-green: 177 100% 45%; /* #00E5D8 primary teal */
+    --teal-saas-yellow: 177 100% 56%; /* #2AFADF accent hover */
+    --teal-saas-peach: 177 100% 56%; /* #2AFADF accent hover */
+    --teal-saas-maroon: 0 75% 65%; /* #E57373 red for errors */
+    --teal-saas-red: 0 75% 65%; /* #E57373 red for errors */
+    --teal-saas-mauve: 177 100% 45%; /* #00E5D8 primary teal */
+    --teal-saas-pink: 177 100% 56%; /* #2AFADF accent hover */
+    --teal-saas-flamingo: 177 100% 56%; /* #2AFADF accent hover */
+    --teal-saas-rosewater: 210 40% 92%; /* #E6F1FF primary text */
+
+    /* ========================================
        SHOPIFY HORIZON (Modern Clean)
        ======================================== */
     --horizon-base: 0 0% 100%; /* ffffff pure white */
@@ -625,6 +655,42 @@
     --sidebar-border: 240 15% 22%;
     --sidebar-ring: 261 100% 75%;
   }
+
+  /* Teal SaaS (Dark Teal / Neon Cyan Premium SaaS Theme) */
+  [data-theme="teal-saas"] {
+    --background: var(--teal-saas-base);
+    --foreground: var(--teal-saas-text);
+    --card: var(--teal-saas-surface-0);
+    --card-foreground: var(--teal-saas-text);
+    --popover: var(--teal-saas-surface-1);
+    --popover-foreground: var(--teal-saas-text);
+    --primary: var(--teal-saas-teal);
+    --primary-foreground: var(--teal-saas-base);
+    --secondary: var(--teal-saas-surface-1);
+    --secondary-foreground: var(--teal-saas-text);
+    --muted: var(--teal-saas-surface-2);
+    --muted-foreground: var(--teal-saas-subtext-0);
+    --accent: var(--teal-saas-teal);
+    --accent-foreground: var(--teal-saas-base);
+    --destructive: var(--teal-saas-red);
+    --destructive-foreground: var(--teal-saas-text);
+    --border: var(--teal-saas-surface-1);
+    --input: var(--teal-saas-surface-0);
+    --ring: var(--teal-saas-teal);
+    --chart-1: var(--teal-saas-teal);
+    --chart-2: var(--teal-saas-sky);
+    --chart-3: var(--teal-saas-green);
+    --chart-4: var(--teal-saas-yellow);
+    --chart-5: var(--teal-saas-pink);
+    --sidebar-background: var(--teal-saas-base);
+    --sidebar-foreground: var(--teal-saas-text);
+    --sidebar-primary: var(--teal-saas-teal);
+    --sidebar-primary-foreground: var(--teal-saas-base);
+    --sidebar-accent: var(--teal-saas-surface-1);
+    --sidebar-accent-foreground: var(--teal-saas-text);
+    --sidebar-border: var(--teal-saas-surface-1);
+    --sidebar-ring: var(--teal-saas-teal);
+  }
 }
 
 @layer base {
@@ -633,6 +699,20 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  .font-headline {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 700;
+  }
+  
+  .font-body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
   }
 }
 
@@ -653,10 +733,115 @@
   }
   
   .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    background: hsl(var(--card) / 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 10px 30px hsl(var(--primary) / 0.08);
+    border-radius: 20px;
+  }
+
+  /* Premium SaaS button styles */
+  .saas-button {
+    background: hsl(var(--primary));
+    border: none;
+    border-radius: 50px;
+    color: hsl(var(--primary-foreground));
+    font-weight: 600;
+    transition: all 0.2s ease-out;
+    box-shadow: 0 4px 14px hsl(var(--primary) / 0.2);
+  }
+
+  .saas-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px hsl(var(--primary) / 0.3);
+    background: hsl(var(--primary) / 0.9);
+  }
+
+  .saas-button:disabled {
+    opacity: 0.5;
+    transform: none;
+    box-shadow: 0 4px 14px hsl(var(--primary) / 0.1);
+  }
+
+  /* Background glow effect */
+  .bg-glow {
+    background: hsl(var(--background));
+  }
+
+  /* Teal glow text */
+  .text-glow {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+  }
+
+  /* Premium gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Premium card hover animations */
+  .premium-card {
+    background: hsl(var(--card) / 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+    border-radius: 16px;
+    box-shadow: 
+      0 10px 30px hsl(var(--primary) / 0.08),
+      0 0 0 1px hsl(var(--primary) / 0.05);
+  }
+
+  /* Hover effect for buttons only */
+  .button-hover {
+    transition: border-color 0.3s ease-out;
+  }
+
+  .button-hover:hover {
+    border-color: hsl(var(--primary)) !important;
+    background-color: inherit !important;
+    color: inherit !important;
+  }
+
+  /* Enhanced input styles */
+  .premium-input {
+    background: hsl(var(--background) / 0.6);
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    color: hsl(var(--foreground));
+    transition: all 0.2s ease-out;
+  }
+
+  .premium-input:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+    outline: none;
+  }
+
+  /* Smooth fade-in animation */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

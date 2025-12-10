@@ -79,7 +79,7 @@ export default function ChatPage({ params }: ChatPageProps) {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-background font-body text-foreground">
+      <main className="min-h-screen bg-glow font-body text-foreground">
         <div className="container mx-auto max-w-4xl p-3 sm:p-4 md:p-8">
           <div className="flex items-center justify-center h-32">
             <p className="text-muted-foreground">Loading repository information...</p>
@@ -90,7 +90,7 @@ export default function ChatPage({ params }: ChatPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-background font-body text-foreground">
+    <main className="min-h-screen bg-glow font-body text-foreground">
       <div className="container mx-auto max-w-4xl p-3 sm:p-4 md:p-8">
         <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4 mb-3 sm:mb-4 md:mb-8">
           <div className="text-left min-w-0 flex-1">
@@ -101,7 +101,7 @@ export default function ChatPage({ params }: ChatPageProps) {
                   href={repoInfo.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent hover:text-accent/80 hover:underline transition-all duration-200 cursor-pointer inline-flex items-center gap-1 break-all sm:break-normal"
+                  className="text-primary hover:text-primary/80 hover:underline transition-all duration-200 cursor-pointer inline-flex items-center gap-1 break-all sm:break-normal text-glow"
                 >
                   <span className="break-all">{repoInfo.owner}/{repoInfo.repo}</span>
                   <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 flex-shrink-0" />
@@ -119,7 +119,7 @@ export default function ChatPage({ params }: ChatPageProps) {
               type="button"
               variant="outline"
               size="sm"
-              className="flex-1 sm:flex-initial sm:w-auto flex-shrink-0"
+              className="flex-1 sm:flex-initial sm:w-auto flex-shrink-0 bg-background/50 border-border/50 hover:bg-primary/10 hover:border-primary/30 transition-all duration-200 button-hover"
               onClick={async () => {
                 const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
                 const title = repoInfo ? `${repoInfo.owner}/${repoInfo.repo}` : 'Chat';
@@ -142,7 +142,7 @@ export default function ChatPage({ params }: ChatPageProps) {
               <span className="text-xs sm:text-sm">Share</span>
             </Button>
 
-            <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-initial sm:w-auto flex-shrink-0">
+            <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-initial sm:w-auto flex-shrink-0 bg-background/50 border-border/50 hover:bg-primary/10 hover:border-primary/30 transition-all duration-200 button-hover">
               <Link href="/">
                 <Home className="mr-1 sm:mr-2 h-4 w-4" />
                 <span className="text-xs sm:text-sm">Home</span>
