@@ -4,23 +4,322 @@
 
 @layer base {
   :root {
-    /* Everforest Dark Theme - Maximum Vibrant Whites */
+    /* =========================================
+       THEME SWITCHING SYSTEM
+       =========================================
+       Change the data-theme attribute on <html> to switch themes:
+       - data-theme="evergreen" (Your original dark theme)
+       - data-theme="latte" (Catppuccin light)
+       - data-theme="frappe" (Catppuccin muted dark)
+       - data-theme="macchiato" (Catppuccin medium dark)
+       - data-theme="mocha" (Catppuccin rich dark) - DEFAULT
+       - data-theme="monokai" (Monokai Pro vibrant)
+       - data-theme="synthwave" (Neon retro '80s)
+       - data-theme="horizon" (Shopify modern clean)
+    */
+
+    /* ========================================
+       EVERFOREST DARK (Evergreen Theme)
+       ======================================== */
+    --evergreen-base: 198 21% 21%; /* 2D353B */
+    --evergreen-mantle: 195 13% 25%; /* 343F44 */
+    --evergreen-crust: 198 17% 18%; /* 232A2E */
+    --evergreen-surface-0: 195 13% 25%; /* 343F44 */
+    --evergreen-surface-1: 198 17% 28%; /* 3D484D */
+    --evergreen-surface-2: 198 15% 32%; /* 475258 */
+    --evergreen-overlay-0: 198 13% 36%; /* 4F585E */
+    --evergreen-overlay-1: 198 11% 40%; /* 56606A */
+    --evergreen-overlay-2: 63 8% 54%; /* 859289 */
+    --evergreen-subtext-0: 63 8% 54%; /* 859289 */
+    --evergreen-subtext-1: 60 11% 63%; /* 9DA9A0 */
+    --evergreen-text: 43 16% 83%; /* D3C6AA */
+    --evergreen-lavender: 323 20% 69%; /* purple */
+    --evergreen-blue: 185 25% 62%; /* blue */
+    --evergreen-sapphire: 185 25% 62%; /* blue */
+    --evergreen-sky: 167 27% 64%; /* aqua */
+    --evergreen-teal: 167 27% 64%; /* aqua */
+    --evergreen-green: 142 26% 64%; /* A7C080 green */
+    --evergreen-yellow: 37 38% 69%; /* yellow */
+    --evergreen-peach: 37 38% 69%; /* yellow */
+    --evergreen-maroon: 5 49% 70%; /* E67E80 red */
+    --evergreen-red: 5 49% 70%; /* E67E80 red */
+    --evergreen-mauve: 323 20% 69%; /* purple */
+    --evergreen-pink: 323 20% 69%; /* purple */
+    --evergreen-flamingo: 5 49% 70%; /* E67E80 red */
+    --evergreen-rosewater: 43 16% 83%; /* D3C6AA */
+
+    /* ========================================
+       CATPPUCCIN LATTE (Light Theme)
+       ======================================== */
+    --latte-base: 220 23% 95%;
+    --latte-mantle: 220 22% 92%;
+    --latte-crust: 220 21% 89%;
+    --latte-surface-0: 223 16% 83%;
+    --latte-surface-1: 225 14% 77%;
+    --latte-surface-2: 227 12% 71%;
+    --latte-overlay-0: 228 11% 65%;
+    --latte-overlay-1: 231 10% 59%;
+    --latte-overlay-2: 232 10% 53%;
+    --latte-subtext-0: 233 10% 47%;
+    --latte-subtext-1: 233 13% 41%;
+    --latte-text: 234 16% 35%;
+    --latte-lavender: 231 97% 72%;
+    --latte-blue: 220 91% 54%;
+    --latte-sapphire: 189 70% 42%;
+    --latte-sky: 197 97% 46%;
+    --latte-teal: 183 74% 35%;
+    --latte-green: 109 58% 40%;
+    --latte-yellow: 35 77% 49%;
+    --latte-peach: 22 99% 52%;
+    --latte-maroon: 355 76% 59%;
+    --latte-red: 347 87% 44%;
+    --latte-mauve: 266 85% 58%;
+    --latte-pink: 316 73% 69%;
+    --latte-flamingo: 0 60% 67%;
+    --latte-rosewater: 11 59% 67%;
+
+    /* ========================================
+       CATPPUCCIN FRAPPÉ (Dark - Muted)
+       ======================================== */
+    --frappe-base: 229 19% 23%;
+    --frappe-mantle: 231 19% 20%;
+    --frappe-crust: 229 20% 17%;
+    --frappe-surface-0: 230 16% 30%;
+    --frappe-surface-1: 227 15% 37%;
+    --frappe-surface-2: 228 13% 44%;
+    --frappe-overlay-0: 229 13% 52%;
+    --frappe-overlay-1: 227 17% 58%;
+    --frappe-overlay-2: 228 22% 66%;
+    --frappe-subtext-0: 228 29% 73%;
+    --frappe-subtext-1: 227 44% 80%;
+    --frappe-text: 227 70% 87%;
+    --frappe-lavender: 239 66% 84%;
+    --frappe-blue: 222 74% 74%;
+    --frappe-sapphire: 199 55% 69%;
+    --frappe-sky: 189 48% 73%;
+    --frappe-teal: 172 39% 65%;
+    --frappe-green: 96 44% 68%;
+    --frappe-yellow: 40 62% 73%;
+    --frappe-peach: 20 79% 70%;
+    --frappe-maroon: 358 66% 76%;
+    --frappe-red: 359 68% 71%;
+    --frappe-mauve: 277 59% 76%;
+    --frappe-pink: 316 73% 84%;
+    --frappe-flamingo: 0 59% 84%;
+    --frappe-rosewater: 10 57% 88%;
+
+    /* ========================================
+       CATPPUCCIN MACCHIATO (Dark - Medium)
+       ======================================== */
+    --macchiato-base: 232 23% 18%;
+    --macchiato-mantle: 233 23% 15%;
+    --macchiato-crust: 236 23% 12%;
+    --macchiato-surface-0: 230 19% 26%;
+    --macchiato-surface-1: 231 16% 34%;
+    --macchiato-surface-2: 230 14% 41%;
+    --macchiato-overlay-0: 230 12% 49%;
+    --macchiato-overlay-1: 228 15% 57%;
+    --macchiato-overlay-2: 228 20% 65%;
+    --macchiato-subtext-0: 227 27% 72%;
+    --macchiato-subtext-1: 228 39% 80%;
+    --macchiato-text: 227 68% 88%;
+    --macchiato-lavender: 234 82% 85%;
+    --macchiato-blue: 220 83% 75%;
+    --macchiato-sapphire: 199 66% 69%;
+    --macchiato-sky: 189 59% 73%;
+    --macchiato-teal: 171 47% 69%;
+    --macchiato-green: 105 48% 72%;
+    --macchiato-yellow: 40 70% 78%;
+    --macchiato-peach: 21 86% 73%;
+    --macchiato-maroon: 355 71% 77%;
+    --macchiato-red: 351 74% 73%;
+    --macchiato-mauve: 267 83% 80%;
+    --macchiato-pink: 316 74% 85%;
+    --macchiato-flamingo: 0 58% 86%;
+    --macchiato-rosewater: 10 58% 90%;
+
+    /* ========================================
+       CATPPUCCIN MOCHA (Dark - Rich) - DEFAULT
+       ======================================== */
+    --mocha-base: 240 21% 15%;
+    --mocha-mantle: 240 21% 12%;
+    --mocha-crust: 240 23% 9%;
+    --mocha-surface-0: 237 16% 23%;
+    --mocha-surface-1: 234 13% 31%;
+    --mocha-surface-2: 233 12% 39%;
+    --mocha-overlay-0: 231 11% 47%;
+    --mocha-overlay-1: 230 13% 55%;
+    --mocha-overlay-2: 228 17% 64%;
+    --mocha-subtext-0: 228 24% 72%;
+    --mocha-subtext-1: 227 35% 80%;
+    --mocha-text: 226 64% 88%;
+    --mocha-lavender: 232 97% 85%;
+    --mocha-blue: 217 92% 76%;
+    --mocha-sapphire: 199 76% 69%;
+    --mocha-sky: 189 71% 73%;
+    --mocha-teal: 170 57% 73%;
+    --mocha-green: 115 54% 76%;
+    --mocha-yellow: 41 86% 83%;
+    --mocha-peach: 23 92% 75%;
+    --mocha-maroon: 350 65% 77%;
+    --mocha-red: 343 81% 75%;
+    --mocha-mauve: 267 84% 81%;
+    --mocha-pink: 316 72% 86%;
+    --mocha-flamingo: 0 59% 88%;
+    --mocha-rosewater: 10 56% 91%;
+
+    /* ========================================
+       MONOKAI PRO (Dark - Vibrant)
+       ======================================== */
+    --monokai-base: 260 15% 8%; /* 19181a */
+    --monokai-mantle: 260 15% 6%; /* 1e1e20 */
+    --monokai-crust: 260 15% 4%; /* 161618 */
+    --monokai-surface-0: 260 15% 12%; /* 221f22 */
+    --monokai-surface-1: 260 15% 16%; /* 2d2a2e */
+    --monokai-surface-2: 260 15% 20%; /* 403e41 */
+    --monokai-overlay-0: 260 10% 30%; /* 5b595c */
+    --monokai-overlay-1: 260 8% 40%; /* 727072 */
+    --monokai-overlay-2: 260 6% 50%; /* 939293 */
+    --monokai-subtext-0: 260 4% 60%; /* ab9df2 */
+    --monokai-subtext-1: 260 4% 70%; /* c1c0c0 */
+    --monokai-text: 0 0% 95%; /* fcfcfa */
+    --monokai-lavender: 261 44% 70%; /* ab9df2 */
+    --monokai-blue: 221 55% 65%; /* 78dce8 */
+    --monokai-sapphire: 221 55% 65%; /* 78dce8 */
+    --monokai-sky: 186 100% 69%; /* a9dc76 */
+    --monokai-teal: 186 100% 69%; /* a9dc76 */
+    --monokai-green: 95 38% 62%; /* a9dc76 */
+    --monokai-yellow: 54 89% 68%; /* ffd866 */
+    --monokai-peach: 32 89% 68%; /* fc9867 */
+    --monokai-maroon: 343 75% 68%; /* ff6188 */
+    --monokai-red: 343 75% 68%; /* ff6188 */
+    --monokai-mauve: 261 44% 70%; /* ab9df2 */
+    --monokai-pink: 320 100% 79%; /* ff6188 */
+    --monokai-flamingo: 32 89% 68%; /* fc9867 */
+    --monokai-rosewater: 0 0% 95%; /* fcfcfa */
+
+    /* ========================================
+       SYNTHWAVE '84 (Neon Retro)
+       ======================================== */
+    --synthwave-base: 240 24% 17%; /* 2a2139 */
+    --synthwave-mantle: 240 29% 15%; /* 1e1835 */
+    --synthwave-crust: 240 32% 13%; /* 181430 */
+    --synthwave-surface-0: 244 24% 20%; /* 34294f */
+    --synthwave-surface-1: 248 24% 23%; /* 3e335a */
+    --synthwave-surface-2: 252 24% 26%; /* 483d66 */
+    --synthwave-overlay-0: 256 20% 35%; /* 5a5472 */
+    --synthwave-overlay-1: 260 16% 45%; /* 726b7f */
+    --synthwave-overlay-2: 264 12% 55%; /* 8a828c */
+    --synthwave-subtext-0: 268 8% 65%; /* a29a99 */
+    --synthwave-subtext-1: 272 6% 75%; /* b5afa6 */
+    --synthwave-text: 0 0% 99%; /* fdfdfd */
+    --synthwave-lavender: 261 44% 70%; /* ab9df2 */
+    --synthwave-blue: 186 100% 69%; /* 36f9f6 cyan */
+    --synthwave-sapphire: 186 100% 69%; /* 36f9f6 cyan */
+    --synthwave-sky: 186 100% 69%; /* 36f9f6 cyan */
+    --synthwave-teal: 150 79% 70%; /* 72f1b8 green */
+    --synthwave-green: 150 79% 70%; /* 72f1b8 */
+    --synthwave-yellow: 50 89% 68%; /* fede5d */
+    --synthwave-peach: 20 89% 70%; /* fc9867 */
+    --synthwave-maroon: 0 75% 68%; /* fe4450 red */
+    --synthwave-red: 0 75% 68%; /* fe4450 */
+    --synthwave-mauve: 310 100% 79%; /* ff7edb neon pink */
+    --synthwave-pink: 310 100% 79%; /* ff7edb */
+    --synthwave-flamingo: 330 90% 75%; /* fc28a8 */
+    --synthwave-rosewater: 0 0% 99%; /* fdfdfd */
+
+    /* ========================================
+       SHOPIFY HORIZON (Modern Clean)
+       ======================================== */
+    --horizon-base: 0 0% 100%; /* ffffff pure white */
+    --horizon-mantle: 210 17% 98%; /* f8fafc light gray */
+    --horizon-crust: 210 20% 96%; /* f1f5f9 light gray border */
+    --horizon-surface-0: 210 20% 94%; /* e2e8f0 subtle gray */
+    --horizon-surface-1: 214 32% 91%; /* dbeafe light blue */
+    --horizon-surface-2: 220 26% 85%; /* cbd5e1 medium gray */
+    --horizon-overlay-0: 215 20% 65%; /* 94a3b8 muted gray */
+    --horizon-overlay-1: 215 16% 47%; /* 64748b slate gray */
+    --horizon-overlay-2: 215 25% 27%; /* 334155 dark slate */
+    --horizon-subtext-0: 215 28% 17%; /* 1e293b darker slate */
+    --horizon-subtext-1: 222 84% 5%; /* 020617 very dark */
+    --horizon-text: 222 84% 5%; /* 020617 almost black */
+    --horizon-lavender: 263 70% 50%; /* 7c3aed purple */
+    --horizon-blue: 213 94% 68%; /* 60a5fa bright blue */
+    --horizon-sapphire: 199 89% 48%; /* 0ea5e9 sky blue */
+    --horizon-sky: 204 94% 94%; /* e0f2fe light sky */
+    --horizon-teal: 172 66% 50%; /* 14b8a6 teal */
+    --horizon-green: 142 71% 45%; /* 16a34a green */
+    --horizon-yellow: 48 96% 53%; /* facc15 amber */
+    --horizon-peach: 25 95% 53%; /* fb923c orange */
+    --horizon-maroon: 0 84% 60%; /* e11d48 rose */
+    --horizon-red: 0 84% 60%; /* e11d48 red */
+    --horizon-mauve: 263 70% 50%; /* 7c3aed purple */
+    --horizon-pink: 329 86% 70%; /* f472b6 pink */
+    --horizon-flamingo: 17 88% 40%; /* c2410c orange red */
+    --horizon-rosewater: 0 0% 100%; /* ffffff white */
+
+    /* ========================================
+       DEFAULT THEME VALUES (Mocha)
+       ======================================== */
+    --background: var(--mocha-base);
+    --foreground: var(--mocha-text);
+    --card: var(--mocha-surface-0);
+    --card-foreground: var(--mocha-text);
+    --popover: var(--mocha-surface-1);
+    --popover-foreground: var(--mocha-text);
+    --primary: var(--mocha-blue);
+    --primary-foreground: var(--mocha-base);
+    --secondary: var(--mocha-surface-1);
+    --secondary-foreground: var(--mocha-text);
+    --muted: var(--mocha-surface-2);
+    --muted-foreground: var(--mocha-subtext-1);
+    --accent: var(--mocha-mauve);
+    --accent-foreground: var(--mocha-base);
+    --destructive: var(--mocha-red);
+    --destructive-foreground: var(--mocha-text);
+    --border: var(--mocha-overlay-0);
+    --input: var(--mocha-surface-2);
+    --ring: var(--mocha-blue);
+    --chart-1: var(--mocha-blue);
+    --chart-2: var(--mocha-teal);
+    --chart-3: var(--mocha-green);
+    --chart-4: var(--mocha-yellow);
+    --chart-5: var(--mocha-pink);
+    --radius: 0.5rem;
+    --sidebar-background: var(--mocha-base);
+    --sidebar-foreground: var(--mocha-text);
+    --sidebar-primary: var(--mocha-blue);
+    --sidebar-primary-foreground: var(--mocha-base);
+    --sidebar-accent: var(--mocha-surface-1);
+    --sidebar-accent-foreground: var(--mocha-text);
+    --sidebar-border: var(--mocha-overlay-0);
+    --sidebar-ring: var(--mocha-blue);
+  }
+
+  /* ========================================
+     THEME SWITCHING SELECTORS
+     ========================================
+     Add data-theme attribute to <html> element to switch themes
+  */
+
+  /* Everforest Dark Theme */
+  [data-theme="evergreen"] {
     --background: 198 21% 21%; /* 2D353B */
-    --foreground: 0 0% 98%; /* Pure vibrant white */
+    --foreground: 43 16% 83%; /* D3C6AA */
     --card: 198 21% 21%; /* 2D353B */
-    --card-foreground: 0 0% 98%; /* Pure vibrant white */
+    --card-foreground: 43 16% 83%; /* D3C6AA */
     --popover: 195 13% 25%; /* 343F44 */
-    --popover-foreground: 0 0% 98%; /* Pure vibrant white */
+    --popover-foreground: 43 16% 83%; /* D3C6AA */
     --primary: 142 26% 64%; /* A7C080 green */
     --primary-foreground: 198 21% 21%; /* 2D353B */
     --secondary: 195 13% 25%; /* 343F44 */
-    --secondary-foreground: 0 0% 98%; /* Pure vibrant white */
+    --secondary-foreground: 43 16% 83%; /* D3C6AA */
     --muted: 198 17% 28%; /* 3D484D */
-    --muted-foreground: 0 0% 92%; /* Very bright muted text */
+    --muted-foreground: 63 8% 54%; /* 859289 */
     --accent: 142 26% 64%; /* A7C080 green */
     --accent-foreground: 198 21% 21%; /* 2D353B */
     --destructive: 5 49% 70%; /* E67E80 red */
-    --destructive-foreground: 0 0% 98%; /* Pure vibrant white */
+    --destructive-foreground: 43 16% 83%; /* D3C6AA */
     --border: 198 17% 28%; /* 3D484D */
     --input: 198 17% 28%; /* 3D484D */
     --ring: 142 26% 64%; /* A7C080 */
@@ -29,15 +328,302 @@
     --chart-3: 142 26% 64%; /* green */
     --chart-4: 37 38% 69%; /* yellow */
     --chart-5: 323 20% 69%; /* purple */
-    --radius: 0.5rem;
     --sidebar-background: 198 21% 21%;
-    --sidebar-foreground: 0 0% 98%; /* Pure vibrant white */
+    --sidebar-foreground: 43 16% 83%;
     --sidebar-primary: 142 26% 64%;
     --sidebar-primary-foreground: 198 21% 21%;
     --sidebar-accent: 195 13% 25%;
-    --sidebar-accent-foreground: 0 0% 98%; /* Pure vibrant white */
+    --sidebar-accent-foreground: 43 16% 83%;
     --sidebar-border: 198 17% 28%;
     --sidebar-ring: 142 26% 64%;
+  }
+
+  /* Catppuccin Latte (Light) */
+  [data-theme="latte"] {
+    --background: var(--latte-base);
+    --foreground: var(--latte-text);
+    --card: var(--latte-surface-0);
+    --card-foreground: var(--latte-text);
+    --popover: var(--latte-surface-1);
+    --popover-foreground: var(--latte-text);
+    --primary: var(--latte-blue);
+    --primary-foreground: var(--latte-base);
+    --secondary: var(--latte-surface-1);
+    --secondary-foreground: var(--latte-text);
+    --muted: var(--latte-surface-2);
+    --muted-foreground: var(--latte-subtext-1);
+    --accent: var(--latte-mauve);
+    --accent-foreground: var(--latte-base);
+    --destructive: var(--latte-red);
+    --destructive-foreground: var(--latte-text);
+    --border: var(--latte-overlay-0);
+    --input: var(--latte-surface-2);
+    --ring: var(--latte-blue);
+    --chart-1: var(--latte-blue);
+    --chart-2: var(--latte-teal);
+    --chart-3: var(--latte-green);
+    --chart-4: var(--latte-yellow);
+    --chart-5: var(--latte-pink);
+    --sidebar-background: var(--latte-base);
+    --sidebar-foreground: var(--latte-text);
+    --sidebar-primary: var(--latte-blue);
+    --sidebar-primary-foreground: var(--latte-base);
+    --sidebar-accent: var(--latte-surface-1);
+    --sidebar-accent-foreground: var(--latte-text);
+    --sidebar-border: var(--latte-overlay-0);
+    --sidebar-ring: var(--latte-blue);
+  }
+
+  /* Catppuccin Frappé (Muted Dark) */
+  [data-theme="frappe"] {
+    --background: var(--frappe-base);
+    --foreground: var(--frappe-text);
+    --card: var(--frappe-surface-0);
+    --card-foreground: var(--frappe-text);
+    --popover: var(--frappe-surface-1);
+    --popover-foreground: var(--frappe-text);
+    --primary: var(--frappe-blue);
+    --primary-foreground: var(--frappe-base);
+    --secondary: var(--frappe-surface-1);
+    --secondary-foreground: var(--frappe-text);
+    --muted: var(--frappe-surface-2);
+    --muted-foreground: var(--frappe-subtext-1);
+    --accent: var(--frappe-mauve);
+    --accent-foreground: var(--frappe-base);
+    --destructive: var(--frappe-red);
+    --destructive-foreground: var(--frappe-text);
+    --border: var(--frappe-overlay-0);
+    --input: var(--frappe-surface-2);
+    --ring: var(--frappe-blue);
+    --chart-1: var(--frappe-blue);
+    --chart-2: var(--frappe-teal);
+    --chart-3: var(--frappe-green);
+    --chart-4: var(--frappe-yellow);
+    --chart-5: var(--frappe-pink);
+    --sidebar-background: var(--frappe-base);
+    --sidebar-foreground: var(--frappe-text);
+    --sidebar-primary: var(--frappe-blue);
+    --sidebar-primary-foreground: var(--frappe-base);
+    --sidebar-accent: var(--frappe-surface-1);
+    --sidebar-accent-foreground: var(--frappe-text);
+    --sidebar-border: var(--frappe-overlay-0);
+    --sidebar-ring: var(--frappe-blue);
+  }
+
+  /* Catppuccin Macchiato (Medium Dark) */
+  [data-theme="macchiato"] {
+    --background: var(--macchiato-base);
+    --foreground: var(--macchiato-text);
+    --card: var(--macchiato-surface-0);
+    --card-foreground: var(--macchiato-text);
+    --popover: var(--macchiato-surface-1);
+    --popover-foreground: var(--macchiato-text);
+    --primary: var(--macchiato-blue);
+    --primary-foreground: var(--macchiato-base);
+    --secondary: var(--macchiato-surface-1);
+    --secondary-foreground: var(--macchiato-text);
+    --muted: var(--macchiato-surface-2);
+    --muted-foreground: var(--macchiato-subtext-1);
+    --accent: var(--macchiato-mauve);
+    --accent-foreground: var(--macchiato-base);
+    --destructive: var(--macchiato-red);
+    --destructive-foreground: var(--macchiato-text);
+    --border: var(--macchiato-overlay-0);
+    --input: var(--macchiato-surface-2);
+    --ring: var(--macchiato-blue);
+    --chart-1: var(--macchiato-blue);
+    --chart-2: var(--macchiato-teal);
+    --chart-3: var(--macchiato-green);
+    --chart-4: var(--macchiato-yellow);
+    --chart-5: var(--macchiato-pink);
+    --sidebar-background: var(--macchiato-base);
+    --sidebar-foreground: var(--macchiato-text);
+    --sidebar-primary: var(--macchiato-blue);
+    --sidebar-primary-foreground: var(--macchiato-base);
+    --sidebar-accent: var(--macchiato-surface-1);
+    --sidebar-accent-foreground: var(--macchiato-text);
+    --sidebar-border: var(--macchiato-overlay-0);
+    --sidebar-ring: var(--macchiato-blue);
+  }
+
+  /* Catppuccin Mocha (Rich Dark) - Default */
+  [data-theme="mocha"] {
+    --background: var(--mocha-base);
+    --foreground: var(--mocha-text);
+    --card: var(--mocha-surface-0);
+    --card-foreground: var(--mocha-text);
+    --popover: var(--mocha-surface-1);
+    --popover-foreground: var(--mocha-text);
+    --primary: var(--mocha-blue);
+    --primary-foreground: var(--mocha-base);
+    --secondary: var(--mocha-surface-1);
+    --secondary-foreground: var(--mocha-text);
+    --muted: var(--mocha-surface-2);
+    --muted-foreground: var(--mocha-subtext-1);
+    --accent: var(--mocha-mauve);
+    --accent-foreground: var(--mocha-base);
+    --destructive: var(--mocha-red);
+    --destructive-foreground: var(--mocha-text);
+    --border: var(--mocha-overlay-0);
+    --input: var(--mocha-surface-2);
+    --ring: var(--mocha-blue);
+    --chart-1: var(--mocha-blue);
+    --chart-2: var(--mocha-teal);
+    --chart-3: var(--mocha-green);
+    --chart-4: var(--mocha-yellow);
+    --chart-5: var(--mocha-pink);
+    --sidebar-background: var(--mocha-base);
+    --sidebar-foreground: var(--mocha-text);
+    --sidebar-primary: var(--mocha-blue);
+    --sidebar-primary-foreground: var(--mocha-base);
+    --sidebar-accent: var(--mocha-surface-1);
+    --sidebar-accent-foreground: var(--mocha-text);
+    --sidebar-border: var(--mocha-overlay-0);
+    --sidebar-ring: var(--mocha-blue);
+  }
+
+  /* Monokai Pro (Vibrant Dark) */
+  [data-theme="monokai"] {
+    --background: 260 15% 8%; /* 19181a */
+    --foreground: 0 0% 95%; /* fcfcfa */
+    --card: 260 15% 12%; /* 221f22 */
+    --card-foreground: 0 0% 95%; /* fcfcfa */
+    --popover: 260 15% 16%; /* 2d2a2e */
+    --popover-foreground: 0 0% 95%; /* fcfcfa */
+    --primary: 221 55% 65%; /* 78dce8 blue */
+    --primary-foreground: 260 15% 8%; /* 19181a */
+    --secondary: 260 15% 20%; /* 403e41 */
+    --secondary-foreground: 0 0% 95%; /* fcfcfa */
+    --muted: 260 15% 20%; /* 403e41 */
+    --muted-foreground: 260 4% 70%; /* c1c0c0 */
+    --accent: 261 44% 70%; /* ab9df2 purple */
+    --accent-foreground: 260 15% 8%; /* 19181a */
+    --destructive: 343 75% 68%; /* ff6188 red */
+    --destructive-foreground: 0 0% 95%; /* fcfcfa */
+    --border: 260 15% 20%; /* 403e41 */
+    --input: 260 15% 20%; /* 403e41 */
+    --ring: 221 55% 65%; /* 78dce8 */
+    --chart-1: 221 55% 65%; /* blue */
+    --chart-2: 186 100% 69%; /* teal */
+    --chart-3: 95 38% 62%; /* green */
+    --chart-4: 54 89% 68%; /* yellow */
+    --chart-5: 343 75% 68%; /* pink */
+    --sidebar-background: 260 15% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 221 55% 65%;
+    --sidebar-primary-foreground: 260 15% 8%;
+    --sidebar-accent: 260 15% 16%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 260 15% 20%;
+    --sidebar-ring: 221 55% 65%;
+  }
+
+  /* Synthwave '84 (Neon Retro) */
+  [data-theme="synthwave"] {
+    --background: 240 24% 17%; /* 2a2139 */
+    --foreground: 0 0% 99%; /* fdfdfd */
+    --card: 244 24% 20%; /* 34294f */
+    --card-foreground: 0 0% 99%; /* fdfdfd */
+    --popover: 248 24% 23%; /* 3e335a */
+    --popover-foreground: 0 0% 99%; /* fdfdfd */
+    --primary: 310 100% 79%; /* ff7edb neon pink */
+    --primary-foreground: 240 24% 17%; /* 2a2139 */
+    --secondary: 252 24% 26%; /* 483d66 */
+    --secondary-foreground: 0 0% 99%; /* fdfdfd */
+    --muted: 252 24% 26%; /* 483d66 */
+    --muted-foreground: 272 6% 75%; /* b5afa6 */
+    --accent: 186 100% 69%; /* 36f9f6 cyan */
+    --accent-foreground: 240 24% 17%; /* 2a2139 */
+    --destructive: 0 75% 68%; /* fe4450 red */
+    --destructive-foreground: 0 0% 99%; /* fdfdfd */
+    --border: 252 24% 26%; /* 483d66 */
+    --input: 252 24% 26%; /* 483d66 */
+    --ring: 310 100% 79%; /* ff7edb */
+    --chart-1: 310 100% 79%; /* neon pink */
+    --chart-2: 186 100% 69%; /* cyan */
+    --chart-3: 150 79% 70%; /* green */
+    --chart-4: 50 89% 68%; /* yellow */
+    --chart-5: 0 75% 68%; /* red */
+    --sidebar-background: 240 24% 17%;
+    --sidebar-foreground: 0 0% 99%;
+    --sidebar-primary: 310 100% 79%;
+    --sidebar-primary-foreground: 240 24% 17%;
+    --sidebar-accent: 248 24% 23%;
+    --sidebar-accent-foreground: 0 0% 99%;
+    --sidebar-border: 252 24% 26%;
+    --sidebar-ring: 310 100% 79%;
+  }
+
+  /* Shopify Horizon (Modern Clean) */
+  [data-theme="horizon"] {
+    --background: 0 0% 100%; /* ffffff pure white */
+    --foreground: 222 84% 5%; /* 020617 almost black */
+    --card: 0 0% 100%; /* ffffff white */
+    --card-foreground: 222 84% 5%; /* 020617 almost black */
+    --popover: 0 0% 100%; /* ffffff white */
+    --popover-foreground: 222 84% 5%; /* 020617 almost black */
+    --primary: 213 94% 68%; /* 60a5fa bright blue */
+    --primary-foreground: 0 0% 100%; /* ffffff white */
+    --secondary: 210 17% 98%; /* f8fafc light gray */
+    --secondary-foreground: 222 84% 5%; /* 020617 almost black */
+    --muted: 210 20% 94%; /* e2e8f0 subtle gray */
+    --muted-foreground: 215 16% 47%; /* 64748b slate gray */
+    --accent: 172 66% 50%; /* 14b8a6 teal */
+    --accent-foreground: 0 0% 100%; /* ffffff white */
+    --destructive: 0 84% 60%; /* e11d48 red */
+    --destructive-foreground: 0 0% 100%; /* ffffff white */
+    --border: 210 20% 96%; /* f1f5f9 light gray */
+    --input: 0 0% 100%; /* ffffff white */
+    --ring: 213 94% 68%; /* 60a5fa bright blue */
+    --chart-1: 213 94% 68%; /* blue */
+    --chart-2: 172 66% 50%; /* teal */
+    --chart-3: 142 71% 45%; /* green */
+    --chart-4: 48 96% 53%; /* yellow */
+    --chart-5: 329 86% 70%; /* pink */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 84% 5%;
+    --sidebar-primary: 213 94% 68%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 17% 98%;
+    --sidebar-accent-foreground: 222 84% 5%;
+    --sidebar-border: 210 20% 96%;
+    --sidebar-ring: 213 94% 68%;
+  }
+
+  /* Palenight (Material-Inspired Purple) */
+  [data-theme="palenight"] {
+    --background: 240 21% 15%; /* 292D3E dark blue-gray */
+    --foreground: 220 14% 71%; /* A6ACCD light gray */
+    --card: 240 18% 17%; /* 2E3440 darker blue-gray */
+    --card-foreground: 220 14% 71%; /* A6ACCD light gray */
+    --popover: 240 15% 20%; /* 343B51 medium dark */
+    --popover-foreground: 220 14% 71%; /* A6ACCD light gray */
+    --primary: 261 100% 75%; /* C792EA purple */
+    --primary-foreground: 240 21% 15%; /* 292D3E dark */
+    --secondary: 240 15% 22%; /* 3A3F58 darker surface */
+    --secondary-foreground: 220 14% 71%; /* A6ACCD light gray */
+    --muted: 240 12% 25%; /* 3E4554 muted dark */
+    --muted-foreground: 220 8% 56%; /* 676E95 muted text */
+    --accent: 338 95% 67%; /* F07178 coral/pink */
+    --accent-foreground: 240 21% 15%; /* 292D3E dark */
+    --destructive: 0 62% 56%; /* E53E3E red */
+    --destructive-foreground: 220 14% 71%; /* A6ACCD light gray */
+    --border: 240 15% 22%; /* 3A3F58 border */
+    --input: 240 15% 22%; /* 3A3F58 input background */
+    --ring: 261 100% 75%; /* C792EA purple */
+    --chart-1: 261 100% 75%; /* purple */
+    --chart-2: 199 89% 48%; /* cyan */
+    --chart-3: 95 38% 62%; /* green */
+    --chart-4: 37 93% 58%; /* yellow */
+    --chart-5: 338 95% 67%; /* coral */
+    --sidebar-background: 240 21% 15%;
+    --sidebar-foreground: 220 14% 71%;
+    --sidebar-primary: 261 100% 75%;
+    --sidebar-primary-foreground: 240 21% 15%;
+    --sidebar-accent: 240 15% 20%;
+    --sidebar-accent-foreground: 220 14% 71%;
+    --sidebar-border: 240 15% 22%;
+    --sidebar-ring: 261 100% 75%;
   }
 }
 
