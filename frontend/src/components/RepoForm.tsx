@@ -48,7 +48,7 @@ export function RepoForm() {
   };
 
   return (
-    <Card className="w-full">
+    <Card className="glass-card w-full">
       <CardHeader className="pb-4 sm:pb-6">
         <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
           <Github className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />

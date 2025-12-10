@@ -84,7 +84,7 @@ export default function Home() {
           </TabsContent>
 
           <TabsContent value="pdf" className="mt-4 sm:mt-6">
-             <Card className="flex flex-col items-center justify-center h-[50vh] sm:h-[60vh] md:h-[70vh] border-dashed">
+             <Card className="glass-card flex flex-col items-center justify-center h-[50vh] sm:h-[60vh] md:h-[70vh] border-dashed">
                 <CardHeader className="text-center px-4">
                   <CardTitle className="text-lg sm:text-xl">Coming Soon</CardTitle>
                   <CardDescription className="text-sm sm:text-base leading-relaxed">
