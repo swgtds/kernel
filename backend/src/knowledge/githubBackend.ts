@@ -64,11 +64,22 @@ export class GithubKnowledgeBackend implements KnowledgeBackend {
 
   async retrieve(id: string, query: string): Promise<RetrievedChunk[]> {
     try {
+      console.log(`[GITHUB_BACKEND] Retrieving chunks for repoId: ${id}, query: "${query}"`);
+      
+      // Get all chunks to check if repository exists
+      const allRepoChunks = await vectorStore.getChunksByRepoId(id);
+      console.log(`[GITHUB_BACKEND] Found ${allRepoChunks.length} total chunks for repo ${id}`);
+      
+      if (allRepoChunks.length === 0) {
+        console.log(`[GITHUB_BACKEND] No chunks found for repo ${id}. Repository may not be ingested.`);
+        return [];
+      }
+      
       // Get relevant chunks from vector store
       const chunks = await vectorStore.search(query, 5);
       
       // Filter by repo ID and convert to RetrievedChunk format
-      const relevantChunks = chunks
+      let relevantChunks = chunks
         .filter(chunk => chunk.metadata.repoId === id)
         .map(chunk => ({
           content: chunk.content,
@@ -80,10 +91,78 @@ export class GithubKnowledgeBackend implements KnowledgeBackend {
           },
         }));
 
+      console.log(`[GITHUB_BACKEND] Found ${relevantChunks.length} relevant chunks after search`);
+
+      // For language-related queries, ensure we include relevant file structure info
+      if (this.isLanguageQuery(query) && relevantChunks.length < 3) {
+        console.log(`[GITHUB_BACKEND] Language query detected, adding more context...`);
+        const languageRelevantChunks = this.getLanguageRelevantChunks(allRepoChunks, query);
+        console.log(`[GITHUB_BACKEND] Found ${languageRelevantChunks.length} language-relevant chunks`);
+        
+        // Add language-relevant chunks if we don't have enough context
+        for (const chunk of languageRelevantChunks) {
+          if (!relevantChunks.find(rc => rc.metadata.filePath === chunk.metadata.filePath)) {
+            relevantChunks.push({
+              content: chunk.content,
+              metadata: {
+                filePath: chunk.metadata.filePath,
+                startLine: chunk.metadata.startLine,
+                endLine: chunk.metadata.endLine,
+                score: 0.5,
+              },
+            });
+          }
+        }
+        
+        // Limit to reasonable number
+        relevantChunks = relevantChunks.slice(0, 8);
+      }
+
+      console.log(`[GITHUB_BACKEND] Final result: ${relevantChunks.length} chunks`);
       return relevantChunks;
     } catch (error) {
+      console.error(`[GITHUB_BACKEND] Error in retrieve:`, error);
       throw new Error(`Failed to retrieve chunks: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
+  }
+
+  private isLanguageQuery(query: string): boolean {
+    const languageKeywords = [
+      'written in', 'language', 'java', 'javascript', 'python', 'typescript', 
+      'c++', 'c#', 'go', 'rust', 'php', 'ruby', 'swift', 'kotlin'
+    ];
+    const queryLower = query.toLowerCase();
+    return languageKeywords.some(keyword => queryLower.includes(keyword));
+  }
+
+  private getLanguageRelevantChunks(chunks: FileChunk[], query: string): FileChunk[] {
+    const configFiles = [
+      'pom.xml', 'build.gradle', 'package.json', 'tsconfig.json', 
+      'requirements.txt', 'cargo.toml', 'go.mod', 'composer.json'
+    ];
+    
+    const readmeFiles = ['readme', 'README'];
+    
+    return chunks.filter(chunk => {
+      const filePath = chunk.metadata.filePath.toLowerCase();
+      
+      // Include build/config files
+      if (configFiles.some(config => filePath.includes(config.toLowerCase()))) {
+        return true;
+      }
+      
+      // Include README files
+      if (readmeFiles.some(readme => filePath.includes(readme))) {
+        return true;
+      }
+      
+      // Include files with relevant extensions
+      if (query.toLowerCase().includes('java') && filePath.endsWith('.java')) {
+        return true;
+      }
+      
+      return false;
+    }).slice(0, 3); // Limit to avoid overwhelming context
   }
 
   private generateRepoId(githubUrl: string): string {

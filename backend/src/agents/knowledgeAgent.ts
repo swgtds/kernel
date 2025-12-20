@@ -27,6 +27,10 @@ export class KnowledgeAgent {
       // Retrieve relevant context from the knowledge backend
       const retrievedChunks = await backend.retrieve(targetId, userMessage);
       
+      console.log(`[DEBUG] Query: "${userMessage}"`);
+      console.log(`[DEBUG] Retrieved ${retrievedChunks.length} chunks for repoId: ${targetId}`);
+      console.log(`[DEBUG] Chunk file paths:`, retrievedChunks.map(c => c.metadata.filePath));
+      
       // Build the context from retrieved chunks
       const context = this.buildContext(retrievedChunks);
       
@@ -46,11 +50,14 @@ export class KnowledgeAgent {
 
       const answer = response.choices[0]?.message?.content || 'I apologize, but I could not generate a response.';
       
+      console.log(`[DEBUG] Generated answer length: ${answer.length} characters`);
+      
       // Extract sources from retrieved chunks
       const sources = this.extractSources(retrievedChunks);
 
       return { answer, sources };
     } catch (error) {
+      console.error('[ERROR] Failed to process query:', error);
       throw new Error(`Failed to process query: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
@@ -79,11 +86,13 @@ Your guidelines:
 4. Be concise but comprehensive in your explanations
 5. If you're explaining code, break it down step by step
 6. Do not make assumptions or add information not present in the context
+7. For programming language questions: Look at file extensions (.java, .py, .js, etc.), build files (pom.xml, package.json, etc.), and code syntax to determine languages used
+8. When asked about technologies or languages, examine the context for configuration files, dependencies, and code patterns
 
 Context:
 ${context}
 
-Remember: Only use information from the context above to answer questions.`;
+Remember: Only use information from the context above to answer questions. If you see file extensions like .java, build files like pom.xml, or Java syntax patterns, you can confidently identify Java usage. Similarly for other languages.`;
   }
 
   private buildMessages(
